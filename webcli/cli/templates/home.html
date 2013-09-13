@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	<title>webCLI</title>
+	<link rel="stylesheet" type="text/css" href="/_media/webcli.css">
+	<link rel="icon" href="/_media/favicon.png">
+</head>
+
+<body>
+
+<p>webCLI.</p>
+
+<ul>
+	{% for c in commands %}
+		<li>
+			<b>{{c.keyword}}</b>:
+			{{c.title}},
+			{{c.use_count}} uses.
+		</li>
+	{% endfor %}
+</ul>
+
+</body>
+</html>
