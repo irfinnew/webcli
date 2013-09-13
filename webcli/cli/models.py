@@ -2,7 +2,7 @@ from django.db import models
 import datetime
 
 class Command(models.Model):
-	keyword = models.SlugField(unique=True)
+	keyword = models.CharField(max_length=32, unique=True)
 	title = models.CharField(max_length=32)
 	url = models.URLField()
 	description = models.TextField(blank=True)
