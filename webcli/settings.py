@@ -61,7 +61,7 @@ MEDIA_URL = '/_media/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/admin/'
+ADMIN_MEDIA_PREFIX = '/_media/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '&re^nz++8g@@x8!11xp#%#^n+8=*n#qljen3zc9%i)g_vu8wx5'
