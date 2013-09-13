@@ -16,7 +16,10 @@ def home(request):
 
 
 
-def command(request, keyword, args=''):
+def command(request):
+	path = request.path.split(' ')
+	keyword = path[0][1:]
+	args = ' '.join(path[1:])
 	cmd = get_object_or_404(Command, keyword=keyword)
 
 	cmd.last_used = datetime.datetime.now()
