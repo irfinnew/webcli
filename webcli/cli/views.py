@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 import datetime
 from models import *
+import urllib
 
 
 
@@ -17,7 +18,10 @@ def home(request):
 
 
 def command(request):
-	path = request.path.split(' ')
+	# UGLY HACK: nginx doesn't unquote the url so we do it here. Fuck nginx.
+	path = urlli.unquote(request.path).split(' ')
+	# path = request.path.split(' ')
+
 	keyword = path[0][1:]
 	args = ' '.join(path[1:])
 	cmd = get_object_or_404(Command, keyword=keyword)
