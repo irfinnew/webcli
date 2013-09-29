@@ -19,7 +19,7 @@ def home(request):
 
 def command(request):
 	# UGLY HACK: nginx doesn't unquote the url so we do it here. Fuck nginx.
-	path = urlli.unquote(request.path).split(' ')
+	path = urllib.unquote(request.path).split(' ')
 	# path = request.path.split(' ')
 
 	keyword = path[0][1:]
