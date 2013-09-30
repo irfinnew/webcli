@@ -16,7 +16,7 @@
 	<ul class="commands">
 		{% for c in commands %}
 			<li {%if c.popular%}class="popular"{%endif%} {%if c.common%}class="common"{%endif%}>
-				<span class="cmd">{{c.keyword}}</span>
+				<span class="cmd">{{c.keyword}}{%if c.suggest_url%}...{%endif%}</span>
 				<span class="uses">{{c.use_count}} use{{c.use_count|pluralize}}</span>
 				<span class="desc">{{c.title}}</span>
 			</li>
