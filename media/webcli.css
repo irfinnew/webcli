@@ -1,0 +1,71 @@
+body {
+	font-family: sans-serif;
+	font-size: 14px;
+}
+
+div#main {
+	margin: 0 auto;
+	min-width: 600px;
+	max-width: 1200px;
+	text-align: center;
+}
+
+ul.commands {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.commands li {
+	display: inline-block;
+	width: 150px;
+	height: 80px;
+	margin: 20px;
+	position: relative;
+	border-radius: 5px;
+	text-align: left;
+	border: 1px solid #ddd;
+	cursor: default;
+	box-shadow: 3px 3px 10px 1px #bbb;
+	-moz-box-shadow: 3px 3px 10px 1px #bbb;
+	-webkit-box-shadow: 3px 3px 10px 1px #bbb;
+}
+
+ul.commands li:hover {
+	box-shadow: 3px 3px 10px 1px #888;
+}
+
+ul.commands li.common {
+	background-color: #ffb;
+}
+
+ul.commands li.popular {
+	border: 1px solid gold;
+	background-color: #ff4;
+}
+
+ul.commands li span.cmd {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+ul.commands li span.uses {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 10px;
+	font-size: 11px;
+	color: #777;
+}
+
+ul.commands li span.desc {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 10px;
+	font-size: 12px;
+}

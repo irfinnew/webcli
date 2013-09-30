@@ -10,17 +10,19 @@
 
 <body>
 
-<p>webCLI.</p>
+<div id="main">
+	<p>webCLI.</p>
 
-<ul>
-	{% for c in commands %}
-		<li>
-			<b>{{c.keyword}}</b>:
-			{{c.title}},
-			{{c.use_count}} uses.
-		</li>
-	{% endfor %}
-</ul>
+	<ul class="commands">
+		{% for c in commands %}
+			<li {%if c.popular%}class="popular"{%endif%} {%if c.common%}class="common"{%endif%}>
+				<span class="cmd">{{c.keyword}}</span>
+				<span class="uses">{{c.use_count}} uses</span>
+				<span class="desc">{{c.title}}</span>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
 
 </body>
 </html>
