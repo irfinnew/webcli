@@ -3,7 +3,7 @@
   <ShortName>example.com webCLI</ShortName>
   <Description>cli.example.com - a command-line interface to the web</Description>
   <Url type="text/html" method="get" template="http://cli.example.com/cmd/{searchTerms}"/>
-  <!-- <Url type="application/x-suggestions+json" template="http://ynfuska.ning.com/suggest/?cmd={searchTerms}"/> -->
+  <Url type="application/x-suggestions+json" template="http://cli.example.com/suggest/{searchTerms}"/>
   <Image width="16" height="16">http://cli.example.com/media/favicon.png</Image>
   <InputEncoding>UTF-8</InputEncoding>
   <OutputEncoding>UTF-8</OutputEncoding>
