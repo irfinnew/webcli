@@ -5,6 +5,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('cli.views',
 	url(r'^$', 'home', name='home'),
-	url(r'^[^_]', 'command', name='command'),
-	url(r'^_admin/', include(admin.site.urls), name='admin'),
+	url(r'^cmd/(.*)', 'command', name='command'),
+	url(r'^admin/', include(admin.site.urls), name='admin'),
 )

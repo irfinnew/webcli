@@ -17,12 +17,12 @@ def home(request):
 
 
 
-def command(request):
+def command(request, command):
 	# UGLY HACK: nginx doesn't unquote the url so we do it here. Fuck nginx.
-	path = urllib.unquote(request.path).split(' ')
+	path = urllib.unquote(command).split(' ')
 	# path = request.path.split(' ')
 
-	keyword = path[0][1:]
+	keyword = path[0]
 	args = ' '.join(path[1:])
 	cmd = get_object_or_404(Command, keyword=keyword)
 
