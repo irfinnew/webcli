@@ -1,5 +1,8 @@
-from django.db import models
 import datetime
+
+from django.db import models
+
+
 
 class Command(models.Model):
 	class Meta:
@@ -15,7 +18,5 @@ class Command(models.Model):
 	last_used = models.DateTimeField(blank=True, null=True)
 	use_count = models.IntegerField(default=0)
 
-	def __unicode(self):
+	def __str__(self):
 		return self.keyword
-	def __repr__(self):
-		return self.__str__()

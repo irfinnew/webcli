@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import RequestContext
 import datetime
-from models import *
+from cli.models import *
 import urllib
 
 
@@ -12,7 +12,7 @@ import urllib
 # If the specified command does not exist, and no default command exists, raises a 404.
 def parse_command(command):
 	# UGLY HACK: nginx doesn't unquote the url so we do it here. Fuck nginx.
-	command = urllib.unquote(command)
+	#command = urllib.unquote(command)
 
 	path = command.split(' ')
 	keyword = path[0]
