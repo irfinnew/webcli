@@ -2,15 +2,43 @@
 
 set -e
 
+echo
+echo '\033[36mUpdating code\033[0m'
 cd $HOME/app
-echo '\033[35mUpdating code\033[0m'
 git pull
 
-echo
-echo '\033[35mMigrations\033[0m'
-cd webcli/
-./manage.py migrate
+
+
+echo '\033[36mChecking packages\033[0m'
+cd $HOME/app
+for PKG in $(cat packages.debian)
+do
+	if dpkg --get-selections | grep -q "^$PKG[[:space:]]*install$";
+	then
+		echo "\033[32m   OK   \033[0m$PKG"
+	else
+		echo "\033[31;1mMISSING \033[0m$PKG"
+		MISSING=1
+	fi
+done
+
+if [ -n "$MISSING" ]
+then
+	echo
+	echo "Install missing packages."
+	exit 1
+fi
+
+
 
 echo
-echo '\033[35mRestarting service\033[0m'
+echo '\033[36mMigrations\033[0m'
+cd $HOME/app/webcli/
+./manage.py migrate
+
+
+
+echo
+echo '\033[36mRestarting service\033[0m'
+cd
 pkill gunicorn
