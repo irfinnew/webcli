@@ -19,21 +19,21 @@ def parse_bool(value):
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-DEBUG = parse_bool(os.environ['CY_DEBUG'])
-ENV_NAME = os.environ.get('CY_ENV_NAME', socket.getfqdn())
+DEBUG = parse_bool(os.environ['WEB_DEBUG'])
+ENV_NAME = os.environ.get('WEB_ENV_NAME', socket.getfqdn())
 
 # SECURITY WARNING: keep the secret key used in production secret!
 if DEBUG:
 	SECRET_KEY = 'W7iFfH'
 else:
-	SECRET_KEY = os.environ['CY_SECRET_KEY']
+	SECRET_KEY = os.environ['WEB_SECRET_KEY']
 	if len(SECRET_KEY) < 32:
 		raise Exception('Secret key should be at least 32 characters')
 
 # Access control happens in the webserver, not here.
 ALLOWED_HOSTS = ['*']
 
-SESSION_COOKIE_SECURE = parse_bool(os.environ.get('CY_SECURE_COOKIES', False))
+SESSION_COOKIE_SECURE = parse_bool(os.environ.get('WEB_SECURE_COOKIES', False))
 CSRF_COOKIE_SECURE = SESSION_COOKIE_SECURE
 
 # Application definition
@@ -86,12 +86,12 @@ WSGI_APPLICATION = 'webcli.wsgi.application'
 
 DATABASES = {
 	'default': {
-		'ENGINE': os.environ['CY_DB_DRIVER'],
-		'NAME': os.environ['CY_DB_NAME'],
-		'USER': os.environ.get('CY_DB_USER', ''),
-		'HOST': os.environ.get('CY_DB_HOST', ''),
-		'PORT': os.environ.get('CY_DB_PORT', ''),
-		'PASSWORD': os.environ.get('CY_DB_PASSWORD', ''),
+		'ENGINE': os.environ['WEB_DB_DRIVER'],
+		'NAME': os.environ['WEB_DB_NAME'],
+		'USER': os.environ.get('WEB_DB_USER', ''),
+		'HOST': os.environ.get('WEB_DB_HOST', ''),
+		'PORT': os.environ.get('WEB_DB_PORT', ''),
+		'PASSWORD': os.environ.get('WEB_DB_PASSWORD', ''),
 		'CONN_MAX_AGE': 300,
 	},
 }
@@ -120,13 +120,13 @@ STATICFILES_DIRS = (
 from django.conf.locale.en import formats as en_formats
 en_formats.DATETIME_FORMAT = "Y-m-d H:i:s (D)"
 
-MEDIA_ROOT = os.path.abspath(os.environ['CY_MEDIA_ROOT'])
+MEDIA_ROOT = os.path.abspath(os.environ['WEB_MEDIA_ROOT'])
 
 REQUEST_ID_HEADER = None
 
 if not DEBUG:
-	SERVER_EMAIL = os.environ['CY_ERROR_EMAIL_FROM']
-	ADMINS = ((addr, addr) for addr in os.environ['CY_ERROR_EMAIL_TO'].split())
+	SERVER_EMAIL = os.environ['WEB_ERROR_EMAIL_FROM']
+	ADMINS = ((addr, addr) for addr in os.environ['WEB_ERROR_EMAIL_TO'].split())
 
 LOGGING = {
 	'version': 1,
@@ -161,9 +161,9 @@ LOGGING = {
 			'filters': ['request_id', 'require_debug_true'],
 		},
 		'file': {
-			'level': os.environ['CY_LOGFILE_LEVEL'],
+			'level': os.environ['WEB_LOGFILE_LEVEL'],
 			'class': 'logging.handlers.WatchedFileHandler',
-			'filename': os.path.abspath(os.environ['CY_LOGFILE_PATH']),
+			'filename': os.path.abspath(os.environ['WEB_LOGFILE_PATH']),
 			'formatter': 'verbose',
 			'filters': ['request_id'],
 		},
