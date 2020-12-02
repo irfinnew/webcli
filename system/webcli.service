@@ -4,10 +4,10 @@ Description=WebCLI
 #After=postgresql.service
 
 [Service]
-ExecStart=/srv/www/webcli/app/bin/app-server
+ExecStart=gunicorn3 --name "webcli" --workers 1 --bind "unix:/srv/www/webcli/run/http" "webcli.wsgi:application"
+WorkingDirectory=/srv/www/webcli/app/webcli
 User=webcli
 Restart=always
-WorkingDirectory=/srv/www/webcli/
 
 [Install]
 WantedBy=multi-user.target
