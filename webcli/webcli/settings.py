@@ -10,18 +10,14 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 import os
 import socket
-import dotenv
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
 
 def parse_bool(value):
 	return {'true': True, 'false': False}[str(value).lower()]
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-if 'CY_ENV_FILE' in os.environ:
-	dotenv.read_dotenv(os.environ['CY_ENV_FILE'])
-else:
-	dotenv.read_dotenv('../.env')
 
 DEBUG = parse_bool(os.environ['CY_DEBUG'])
 ENV_NAME = os.environ.get('CY_ENV_NAME', socket.getfqdn())
