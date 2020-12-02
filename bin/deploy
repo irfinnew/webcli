@@ -13,7 +13,7 @@ echo '\033[36mChecking packages\033[0m'
 cd $HOME/app
 for PKG in $(egrep -v '^#' packages.debian)
 do
-	if dpkg --get-selections | grep -q "^$PKG(:.*)?[[:space:]]*install$";
+	if dpkg --get-selections | egrep -q "^$PKG(:.*)?[[:space:]]*install$";
 	then
 		echo "\033[32m   OK   \033[0m$PKG"
 	else
