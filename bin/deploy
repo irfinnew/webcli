@@ -42,3 +42,17 @@ echo
 echo '\033[36mRestarting service\033[0m'
 cd
 pkill -U $USER gunicorn
+
+
+
+echo
+echo '\033[36mChecking systemd service file\033[0m'
+cd $HOME/app/system
+diff -u /etc/systemd/system/webcli.service webcli.service
+
+
+
+echo
+echo '\033[36mChecking nginx configuration\033[0m'
+cd $HOME/app/system
+diff -u /etc/systemd/system/webcli.nginx /etc/nginx/sites-enabled/webcli
