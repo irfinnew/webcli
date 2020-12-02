@@ -1,0 +1,13 @@
+[Unit]
+Description=WebCLI
+#Requires=postgresql.service
+#After=postgresql.service
+
+[Service]
+ExecStart=/srv/www/webcli/app/bin/app-server
+User=webcli
+Restart=always
+WorkingDirectory=/srv/www/webcli/
+
+[Install]
+WantedBy=multi-user.target

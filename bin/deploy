@@ -1,0 +1,16 @@
+#! /bin/sh
+
+set -e
+
+cd $HOME/app
+echo '\033[35mUpdating code\033[0m'
+git pull
+
+echo
+echo '\033[35mMigrations\033[0m'
+cd webcli/
+./manage.py migrate
+
+echo
+echo '\033[35mRestarting service\033[0m'
+pkill gunicorn
