@@ -4,3 +4,4 @@ python3-setproctitle
 
 # Django stuff
 python3-django
+python3-dotenv
