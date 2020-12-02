@@ -5,7 +5,7 @@ set -e
 export PATH="$HOME/bin:$PATH"
 
 export CY_ENV_FILE="$HOME/.env"
-. "$HOME/venv/bin/activate"
+#. "$HOME/venv/bin/activate"
 
 cd "$HOME/app/webcli"
 
