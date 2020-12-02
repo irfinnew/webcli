@@ -1,5 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import RequestContext
 import datetime
@@ -39,10 +39,7 @@ def home(request):
 		elif c.use_count >= most / 200 and c.use_count > 0:
 			c.common = True
 
-	return render_to_response('home.html',
-		{
-			'commands': commands,
-		}, context_instance=RequestContext(request))
+	return render(request, 'home.html', {'commands': commands})
 
 
 
