@@ -1,0 +1,43 @@
+server {
+	listen [::]:80;
+
+	server_name cli.example.com;
+	access_log /var/log/nginx/webcli.access.log extended;
+
+	location /.well-known/acme-challenge {
+		alias /var/lib/acme/challenges;
+	}
+
+	location / {
+		return 301 https://$host$request_uri;
+	}
+}
+
+
+
+server {
+	listen [::]:443;
+
+	server_name cli.example.com;
+	access_log /var/log/nginx/webcli.access.log extended;
+
+	ssl_certificate /var/lib/acme/live/cli.example.com/fullchain;
+	ssl_certificate_key /var/lib/acme/live/cli.example.com/privkey;
+
+	location / {
+		include /etc/nginx/proxy_params;
+		proxy_pass http://unix:/srv/www/webcli/run/http;
+
+		include /etc/nginx/https_headers;
+		add_header Cache-Control "no-store";
+	}
+
+	location /static/ {
+		alias /srv/www/webcli/app/static/;
+		gzip_static on;
+
+		include /etc/nginx/https_headers;
+		add_header Cache-Control "public";
+		expires 7d;
+	}
+}
