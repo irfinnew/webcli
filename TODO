@@ -3,4 +3,3 @@
  - Fix secure cookies issue (?)
  - Convert to Postgres (nah)
  - Add logging statements
- - Refactor settings stuff
