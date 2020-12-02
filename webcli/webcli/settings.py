@@ -98,18 +98,14 @@ DATABASES = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
-# Use system time zone
-TIME_ZONE = None
-
 USE_I18N = True
-
 USE_L10N = True
 
+# Use system time zone
 USE_TZ = True
-
+with open('/etc/timezone') as fd:
+	TIME_ZONE = fd.read().strip()
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
