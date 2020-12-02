@@ -42,6 +42,7 @@ echo
 echo '\033[36mRestarting service\033[0m'
 cd
 pkill -U $USER gunicorn
+echo 'Success, probably.'
 
 
 
