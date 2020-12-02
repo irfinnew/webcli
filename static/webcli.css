@@ -1,6 +1,8 @@
 body {
 	font-family: sans-serif;
 	font-size: 14px;
+	background-color: #222217;
+	color: #eee;
 }
 
 div#main {
@@ -14,11 +16,17 @@ div#header img {
 	width: 1.5em;
 	height: 1.5em;
 	margin-right: 0.5em;
+	box-shadow: 0px 0px 5px #fff;
 }
 
 div#header p {
 	margin: 1em auto;
 	max-width: 42em;
+}
+
+div#header a {
+	color: #88f;
+	text-decoration: none;
 }
 
 ul.commands {
@@ -33,28 +41,31 @@ ul.commands li {
 	height: 80px;
 	margin: 20px;
 	position: relative;
-	border-radius: 5px;
 	text-align: left;
-	border: 1px solid #ddd;
 	cursor: default;
-	box-shadow: 3px 3px 10px 1px #bbb;
-	-moz-box-shadow: 3px 3px 10px 1px #bbb;
-	-webkit-box-shadow: 3px 3px 10px 1px #bbb;
-}
-
-ul.commands li:hover {
-	box-shadow: 3px 3px 10px 1px #888;
-	-moz-box-shadow: 3px 3px 10px 1px #888;
-	-webkit-box-shadow: 3px 3px 10px 1px #888;
-}
-
-ul.commands li.common {
-	background-color: #ffb;
+	background-color: #444444;
+	box-shadow: 0px 0px 6px 1px #000;
 }
 
 ul.commands li.popular {
-	border: 1px solid gold;
-	background-color: #ff4;
+	box-shadow: 0px 0px 6px 1px #f0f;
+	text-shadow: 0px 0px 4px #bbb;
+	color: #fff;
+}
+
+ul.commands li.popular span.uses {
+	color: #f0f;
+	text-shadow: 0px 0px 4px #b0b;
+}
+
+ul.commands li.common {
+	box-shadow: 0px 0px 6px 1px #f00;
+	text-shadow: 0px 0px 4px #888;
+}
+
+ul.commands li.common span.uses {
+	color: #f00;
+	text-shadow: 0px 0px 4px #b00;
 }
 
 ul.commands li span.cmd {
@@ -72,7 +83,7 @@ ul.commands li span.uses {
 	right: 0;
 	padding: 10px;
 	font-size: 11px;
-	color: #777;
+	color: #999;
 }
 
 ul.commands li span.desc {

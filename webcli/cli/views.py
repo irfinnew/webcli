@@ -34,9 +34,9 @@ def home(request):
 
 	most = commands[0].use_count
 	for c in commands:
-		if c.use_count >= most / 20 and c.use_count > 0:
+		if c.use_count >= most / 20 and c.use_count > 1000:
 			c.popular = True
-		elif c.use_count >= most / 200 and c.use_count > 0:
+		elif c.use_count >= most / 200 and c.use_count > 1000:
 			c.common = True
 
 	return render(request, 'home.html', {'commands': commands})
