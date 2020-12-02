@@ -3,15 +3,22 @@ body {
 	font-size: 14px;
 }
 
-p {
-	margin: 1em auto;
-	max-width: 40em;
-}
-
 div#main {
 	margin: 30px auto 10px auto;
 	min-width: 600px;
 	text-align: center;
+}
+
+div#header img {
+	vertical-align: middle;
+	width: 1.5em;
+	height: 1.5em;
+	margin-right: 0.5em;
+}
+
+div#header p {
+	margin: 1em auto;
+	max-width: 40em;
 }
 
 ul.commands {
