@@ -41,4 +41,4 @@ cd $HOME/app/webcli/
 echo
 echo '\033[36mRestarting service\033[0m'
 cd
-pkill gunicorn
+pkill -U $USER gunicorn
