@@ -5,11 +5,10 @@ set -e
 export PATH="$HOME/bin:$PATH"
 
 export CY_ENV_FILE="$HOME/.env"
-#. "$HOME/venv/bin/activate"
 
 cd "$HOME/app/webcli"
 
-exec gunicorn \
+exec gunicorn3 \
 	--name "webcli" \
 	--workers 1 \
 	--max-requests 0 \
