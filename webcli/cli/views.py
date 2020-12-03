@@ -19,7 +19,7 @@ def parse_command(command):
 	args = ' '.join(path[1:])
 
 	try:
-		cmd = Command.objects.get(keyword=keyword)
+		cmd = Command.objects.get(keyword=keyword, active=True)
 	except ObjectDoesNotExist:
 		cmd = Command.objects.get(default=True)
 		keyword = ''
@@ -27,10 +27,10 @@ def parse_command(command):
 
 	return (command, keyword, args, cmd)
 
-	
+
 
 def home(request):
-	commands = Command.objects.all().order_by('-use_count')
+	commands = Command.objects.filter(active=True).order_by('-use_count')
 
 	most = commands[0].use_count
 	for c in commands:

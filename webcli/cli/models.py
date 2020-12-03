@@ -9,6 +9,7 @@ class Command(models.Model):
 		ordering = ['keyword']
 
 	keyword = models.CharField(max_length=32, unique=True)
+	active = models.BooleanField(default=True)
 	default = models.BooleanField(default=False)
 	title = models.CharField(max_length=32)
 	url = models.URLField()
