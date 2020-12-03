@@ -13,12 +13,13 @@ make_inactive.short_description = "Deactivate selected commands"
 
 class CommandAdmin(admin.ModelAdmin):
 	def admin_url(self, instance):
-		if len(instance.url) > 40:
-			return instance.url[:40] + '...'
+		if len(instance.url) > 64:
+			return instance.url[:64] + '...'
 		else:
 			return instance.url
 	admin_url.short_description = "Url"
 
-	list_display = ('keyword', 'title', 'admin_url', 'created_at', 'default', 'last_used', 'use_count', 'active')
+	list_display = ('keyword', 'default', 'active', 'use_count', 'title', 'admin_url', 'created_at', 'last_used')
+	ordering = ['default', 'active', 'use_count']
 	actions = [make_active, make_inactive]
 admin.site.register(Command, CommandAdmin)
