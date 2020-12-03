@@ -3,15 +3,19 @@ body {
 	font-size: 14px;
 	background-color: #222217;
 	color: #eee;
-}
 
-div#main {
-	margin: 30px auto 10px auto;
+	padding: 30px auto 10px auto;
 	min-width: 600px;
 	text-align: center;
 }
 
-div#header img {
+p {
+	margin: 1em auto;
+	max-width: 42em;
+	text-shadow: 0px 0px 5px #000;
+}
+
+p img {
 	vertical-align: middle;
 	width: 1.5em;
 	height: 1.5em;
@@ -19,23 +23,18 @@ div#header img {
 	box-shadow: 0px 0px 5px #fff;
 }
 
-div#header p {
-	margin: 1em auto;
-	max-width: 42em;
-}
-
-div#header a {
+p a {
 	color: #88f;
 	text-decoration: none;
 }
 
-ul.commands {
+ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-ul.commands li {
+ul li {
 	display: inline-block;
 	width: 150px;
 	height: 80px;
@@ -47,28 +46,18 @@ ul.commands li {
 	box-shadow: 0px 0px 6px 1px #000;
 }
 
-ul.commands li.popular {
+ul li.popular {
 	box-shadow: 0px 0px 6px 1px #f0f;
 	text-shadow: 0px 0px 4px #bbb;
 	color: #fff;
 }
 
-ul.commands li.popular span.uses {
-	color: #f0f;
-	text-shadow: 0px 0px 4px #b0b;
-}
-
-ul.commands li.common {
+ul li.common {
 	box-shadow: 0px 0px 6px 1px #f00;
 	text-shadow: 0px 0px 4px #888;
 }
 
-ul.commands li.common span.uses {
-	color: #f00;
-	text-shadow: 0px 0px 4px #b00;
-}
-
-ul.commands li span.cmd {
+ul li cmd {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -77,16 +66,26 @@ ul.commands li span.cmd {
 	font-weight: bold;
 }
 
-ul.commands li span.uses {
+ul li uses {
 	position: absolute;
 	top: 0;
 	right: 0;
 	padding: 10px;
-	font-size: 11px;
+	font-size: 130%;
 	color: #999;
 }
 
-ul.commands li span.desc {
+ul li.popular uses {
+	color: #f0f;
+	text-shadow: 0px 0px 4px #b0b;
+}
+
+ul li.common uses {
+	color: #f00;
+	text-shadow: 0px 0px 4px #b00;
+}
+
+ul li desc {
 	position: absolute;
 	bottom: 0;
 	left: 0;
