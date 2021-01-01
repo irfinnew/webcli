@@ -15,4 +15,5 @@ mv backend.log "$DEST"
 sleep 300
 nice nice gzip "$DEST"
 
-find -mtime +25 -delete
+find -type f -mtime +35 -delete
+find -type d -empty -delete
