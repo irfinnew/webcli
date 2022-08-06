@@ -4,7 +4,7 @@ from . import views
 
 
 urlpatterns = [
-	path(r'', views.home, name='home'),
-	path(r'cmd/(.*)', views.command, name='command'),
-	path(r'suggest/(.*)', views.suggest, name='suggest'),
+	path('', views.home, name='home'),
+	path('cmd/<command>/', views.command, name='command'),
+	path('suggest/<command>/', views.suggest, name='suggest'),
 ]
