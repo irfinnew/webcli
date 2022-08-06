@@ -1,0 +1,5 @@
+#! /bin/sh
+
+. venv/bin/activate
+cd app/webcli
+exec gunicorn --name "webcli" --workers 1 --bind "unix:../../run/http" "webcli.wsgi:application"

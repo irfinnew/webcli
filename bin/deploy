@@ -11,23 +11,24 @@ git pull
 echo
 echo '\033[36mChecking packages\033[0m'
 cd $HOME/app
-for PKG in $(egrep -v '^#' packages.debian)
-do
-	if dpkg --get-selections | egrep -q "^$PKG(:.*)?[[:space:]]*install$";
-	then
-		echo "\033[32m   OK   \033[0m$PKG"
-	else
-		echo "\033[31;1mMISSING \033[0m$PKG"
-		MISSING=1
-	fi
-done
-
-if [ -n "$MISSING" ]
-then
-	echo
-	echo "Install missing packages."
-	exit 1
-fi
+pip install -r requirements.txt
+#for PKG in $(egrep -v '^#' packages.debian)
+#do
+#	if dpkg --get-selections | egrep -q "^$PKG(:.*)?[[:space:]]*install$";
+#	then
+#		echo "\033[32m   OK   \033[0m$PKG"
+#	else
+#		echo "\033[31;1mMISSING \033[0m$PKG"
+#		MISSING=1
+#	fi
+#done
+#
+#if [ -n "$MISSING" ]
+#then
+#	echo
+#	echo "Install missing packages."
+#	exit 1
+#fi
 
 
 

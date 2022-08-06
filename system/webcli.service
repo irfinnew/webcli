@@ -4,8 +4,8 @@ Description=WebCLI
 #After=postgresql.service
 
 [Service]
-ExecStart=gunicorn3 --name "webcli" --workers 1 --bind "unix:/srv/www/webcli/run/http" "webcli.wsgi:application"
-WorkingDirectory=/srv/www/webcli/app/webcli
+ExecStart=/srv/www/webcli/app/bin/appserver
+WorkingDirectory=/srv/www/webcli
 User=webcli
 Restart=always
 
