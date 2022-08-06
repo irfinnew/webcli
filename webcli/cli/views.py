@@ -3,8 +3,9 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import RequestContext
 import datetime
-from cli.models import *
 import urllib
+
+from cli.models import Command
 
 
 

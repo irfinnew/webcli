@@ -1,5 +1,0 @@
- - Flake8 support
- - Check and clean all code
- - Fix secure cookies issue (?)
- - Convert to Postgres (nah)
- - Add logging statements

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from cli.models import *
+
+from cli import models
 
 
 
@@ -11,6 +12,9 @@ def make_inactive(modeladmin, request, queryset):
 	queryset.update(active=False)
 make_inactive.short_description = "Deactivate selected commands"
 
+
+
+@admin.register(models.Command)
 class CommandAdmin(admin.ModelAdmin):
 	def _url(self, instance):
 		truncated = instance.url[:64]
@@ -38,4 +42,3 @@ class CommandAdmin(admin.ModelAdmin):
 	list_display = ('keyword', '_active', '_use_count', '_title', '_url', 'created_at', 'last_used')
 	ordering = ['-default', '-active', '-use_count']
 	actions = [make_active, make_inactive]
-admin.site.register(Command, CommandAdmin)

@@ -1,0 +1,5 @@
+Django
+django-request-id
+python-dotenv
+setproctitle 
+gunicorn
