@@ -1,3 +1,8 @@
+# webcli - A command-line interface to the web.
+#
+# Copyright 2013-2022 Marcel Moreaux
+# Licensed under BSD 3-clause. See LICENSE for details.
+
 import datetime
 
 from django.db import models

@@ -1,3 +1,8 @@
+# webcli - A command-line interface to the web.
+#
+# Copyright 2013-2022 Marcel Moreaux
+# Licensed under BSD 3-clause. See LICENSE for details.
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
