@@ -56,7 +56,10 @@ def command(request, command):
 	cmd.use_count += 1
 	cmd.save()
 
-	return HttpResponseRedirect(cmd.url.replace('%s', args))
+	if not args and cmd.empty_url:
+		return HttpResponseRedirect(cmd.empty_url)
+	else:
+		return HttpResponseRedirect(cmd.url.replace('%s', args))
 
 
 
