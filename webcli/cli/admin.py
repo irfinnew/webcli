@@ -4,6 +4,7 @@
 # Licensed under BSD 3-clause. See LICENSE for details.
 
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
 from cli import models
 
@@ -21,15 +22,8 @@ make_inactive.short_description = "Deactivate selected commands"
 
 @admin.register(models.Command)
 class CommandAdmin(admin.ModelAdmin):
-	def _url(self, instance):
-		truncated = instance.url[:64]
-		return truncated if truncated == instance.url else truncated + '...'
-	_url.short_description = "Url"
-	_url.admin_order_field = 'url'
-
 	def _title(self, instance):
-			return f'<strong>{instance.title}</strong>' if instance.default else instance.title
-	_title.allow_tags = True
+		return mark_safe(f'<strong>{instance.title}</strong>') if instance.default else instance.title
 	_title.short_description = "Title"
 	_title.admin_order_field = 'title'
 
@@ -44,6 +38,7 @@ class CommandAdmin(admin.ModelAdmin):
 	_use_count.short_description = 'Use'
 	_use_count.admin_order_field = 'use_count'
 
-	list_display = ('keyword', '_active', '_use_count', '_title', '_url', 'created_at', 'last_used')
+	list_display = ['keyword', '_active', '_use_count', '_title', 'created_at', 'last_used']
+	readonly_fields = ['created_at', 'last_used']
 	ordering = ['-default', '-active', '-use_count']
 	actions = [make_active, make_inactive]

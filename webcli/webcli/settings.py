@@ -133,6 +133,7 @@ MEDIA_ROOT = os.path.abspath(os.environ['WEB_MEDIA_ROOT'])
 # The default format is stupid anyway.
 from django.conf.locale.en import formats as en_formats
 en_formats.DATETIME_FORMAT = "Y-m-d H:i:s (D)"
+en_formats.DATETIME_FORMAT = "Y-m-d H:i"
 
 # Logging
 REQUEST_ID_HEADER = None
