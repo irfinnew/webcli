@@ -3,12 +3,13 @@
 # Copyright 2013-2022 Marcel Moreaux
 # Licensed under BSD 3-clause. See LICENSE for details.
 
+import urllib
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import RequestContext
-import datetime
-import urllib
+from django.utils import timezone
 
 from cli.models import Command
 
@@ -55,7 +56,7 @@ def opensearch(request):
 def command(request, command):
 	(command, keyword, args, cmd) = parse_command(command)
 
-	cmd.last_used = datetime.datetime.now()
+	cmd.last_used = timezone.now()
 	cmd.use_count += 1
 	cmd.save()
 

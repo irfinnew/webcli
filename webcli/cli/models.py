@@ -3,9 +3,8 @@
 # Copyright 2013-2022 Marcel Moreaux
 # Licensed under BSD 3-clause. See LICENSE for details.
 
-import datetime
-
 from django.db import models
+from django.utils import timezone
 
 
 
@@ -20,7 +19,7 @@ class Command(models.Model):
 	url = models.URLField(help_text='The command is redirected to this URL. <code>%s</code> in the URL is replaced with the command argument.')
 	empty_url = models.URLField(blank=True, help_text='If specified, this URL is used when the command is invoked without arguments.')
 	suggest_url = models.URLField(blank=True, help_text='URL for suggesting completions. Not sure this even works anymore...')
-	created_at = models.DateTimeField(default=datetime.datetime.now)
+	created_at = models.DateTimeField(default=timezone.now)
 	last_used = models.DateTimeField(blank=True, null=True)
 	use_count = models.IntegerField(default=0, help_text='How often this command was invoked. Used to style the home page.')
 
