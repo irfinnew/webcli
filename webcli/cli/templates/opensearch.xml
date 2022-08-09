@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>{{hostname}} webCLI</ShortName>
+  <Description>{{hostname}} - a command-line interface to the web</Description>
+  <Url type="text/html" method="get" template="http://{{hostname}}/cmd/{searchTerms}"/>
+  <Url type="application/x-suggestions+json" template="http://{{hostname}}/suggest/{searchTerms}"/>
+  <Image width="16" height="16">http://{{hostname}}/static/favicon.png</Image>
+  <InputEncoding>UTF-8</InputEncoding>
+  <OutputEncoding>UTF-8</OutputEncoding>
+</OpenSearchDescription>

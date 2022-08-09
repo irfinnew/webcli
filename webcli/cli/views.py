@@ -17,9 +17,6 @@ from cli.models import Command
 # Returns 4-tuple: (command, keyword, args, command object)
 # If the specified command does not exist, and no default command exists, raises a 404.
 def parse_command(command):
-	# UGLY HACK: nginx doesn't unquote the url so we do it here. Fuck nginx.
-	#command = urllib.unquote(command)
-
 	path = command.split(' ')
 	keyword = path[0]
 	args = ' '.join(path[1:])
@@ -46,6 +43,12 @@ def home(request):
 			c.common = True
 
 	return render(request, 'home.html', {'commands': commands})
+
+
+
+def opensearch(request):
+	return render(request, 'opensearch.xml', {'hostname': request.get_host()},
+		content_type='application/opensearchdescription+xml')
 
 
 
