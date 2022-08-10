@@ -18,6 +18,7 @@ from cli.models import Command
 # Returns 4-tuple: (command, keyword, args, command object)
 # If the specified command does not exist, and no default command exists, raises a 404.
 def parse_command(command):
+	command = command.replace('+', ' ')
 	path = command.split(' ')
 	keyword = path[0]
 	args = ' '.join(path[1:])
