@@ -194,3 +194,7 @@ LOGGING = {
 		},
 	}
 }
+
+ADMIN_PATH = os.environ.get('WEB_ADMIN_PATH', '')
+if ADMIN_PATH and not ADMIN_PATH.endswith('/'):
+	ADMIN_PATH += '/'
