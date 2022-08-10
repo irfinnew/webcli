@@ -127,7 +127,8 @@ STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, '../static'),
 )
 
-MEDIA_ROOT = os.path.abspath(os.environ['WEB_MEDIA_ROOT'])
+if 'WEB_MEDIA_ROOT' in os.environ:
+	MEDIA_ROOT = os.path.abspath(os.environ['WEB_MEDIA_ROOT'])
 
 # Bit of a hack, but seems to work well enough.
 # The default format is stupid anyway.
@@ -137,7 +138,7 @@ en_formats.DATETIME_FORMAT = "Y-m-d H:i"
 
 # Logging
 REQUEST_ID_HEADER = None
-if not DEBUG:
+if not DEBUG and 'WEB_ERROR_EMAIL_FROM' in os.environ and 'WEB_ERROR_EMAIL_TO' in os.environ:
 	SERVER_EMAIL = os.environ['WEB_ERROR_EMAIL_FROM']
 	ADMINS = ((addr, addr) for addr in os.environ['WEB_ERROR_EMAIL_TO'].split())
 
