@@ -13,7 +13,6 @@ It was inspired by [YubNub](http://yubnub.org).
 # Using webcli
 
 To start using _webcli_, visit its home page with your browser.  
-I'm hosting a demo version on [webcli.moreaux.nl](https://webcli.moreaux.nl/) that you can use to try it out.
 
 With Chrome, just visit the _webcli_ home page, and Chrome should register it as a search engine.
 Then, go to `Settings` » `Search Engine` » `Manage search engines and site search`.
