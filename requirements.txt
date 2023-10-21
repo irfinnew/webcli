@@ -1,5 +1,5 @@
 Django
-django-request-id
+django-log-request-id
 python-dotenv
 setproctitle 
 gunicorn

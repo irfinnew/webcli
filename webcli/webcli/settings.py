@@ -1,16 +1,6 @@
-"""
-Django settings for the WebCLI project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/4.0/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/4.0/ref/settings/
-"""
-
-from pathlib import Path
 import os
 import socket
+from pathlib import Path
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
@@ -20,6 +10,9 @@ def parse_bool(value):
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+
+#### Core
 DEBUG = parse_bool(os.environ['WEB_DEBUG'])
 ENV_NAME = os.environ.get('WEB_ENV_NAME', socket.getfqdn())
 if DEBUG:
@@ -27,25 +20,26 @@ if DEBUG:
 else:
 	SECRET_KEY = os.environ['WEB_SECRET_KEY']
 
-# Access control happens in the webserver, not here.
-ALLOWED_HOSTS = ['*']
-SESSION_COOKIE_SECURE = parse_bool(os.environ.get('WEB_SECURE_COOKIES', False))
+ALLOWED_HOSTS = ['*']  # Host checking happens in the webserver, not here.
+SESSION_COOKIE_SECURE = parse_bool(os.environ.get('WEB_SECURE_COOKIES', True))
 CSRF_COOKIE_SECURE = SESSION_COOKIE_SECURE
 
-# Application definition
+
+
+#### Application definition
 INSTALLED_APPS = [
-	'cli.apps.CliConfig',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'cli.apps.CliConfig',
 ]
 
 MIDDLEWARE = [
-	'request_id.middleware.RequestIdMiddleware',
-	# Stuff we either do ourselves in the front-end webserver or don't want at all.
+	'log_request_id.middleware.RequestIDMiddleware',
+	# We do this in the front-end webserver.
 	#'django.middleware.security.SecurityMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.common.CommonMiddleware',
@@ -56,6 +50,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'webcli.urls'
+
+ADMIN_PATH = os.environ.get('WEB_ADMIN_PATH', '')
+if ADMIN_PATH and not ADMIN_PATH.endswith('/'):
+	ADMIN_PATH += '/'
 
 TEMPLATES = [
 	{
@@ -75,8 +73,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'webcli.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
+
+#### Database
 DATABASES = {
 	'default': {
 		'ENGINE': os.environ['WEB_DB_DRIVER'],
@@ -88,13 +87,11 @@ DATABASES = {
 		'CONN_MAX_AGE': 300,
 	},
 }
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Password validation
-# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
+
+
+#### Password validation
 AUTH_PASSWORD_VALIDATORS = [
 	{
 		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -110,18 +107,29 @@ AUTH_PASSWORD_VALIDATORS = [
 	},
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.0/topics/i18n/
+
+
+#### Internationalization
 LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
 USE_I18N = True
-
-# Use system time zone
 USE_TZ = True
-with open('/etc/timezone') as fd:
-	TIME_ZONE = fd.read().strip()
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
+# Hmm, I dunno
+# # Use system time zone
+# USE_TZ = True
+# with open('/etc/timezone') as fd:
+# 	TIME_ZONE = fd.read().strip()
+
+# Bit of a hack, but seems to work well enough.
+# The default format is stupid anyway.
+from django.conf.locale.en import formats as en_formats
+en_formats.DATETIME_FORMAT = "Y-m-d H:i:s (D)"
+en_formats.DATETIME_FORMAT = "Y-m-d H:i"
+
+
+
+#### Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (
 	os.path.join(BASE_DIR, '../static'),
@@ -130,14 +138,9 @@ STATICFILES_DIRS = (
 if 'WEB_MEDIA_ROOT' in os.environ:
 	MEDIA_ROOT = os.path.abspath(os.environ['WEB_MEDIA_ROOT'])
 
-# Bit of a hack, but seems to work well enough.
-# The default format is stupid anyway.
-from django.conf.locale.en import formats as en_formats
-en_formats.DATETIME_FORMAT = "Y-m-d H:i:s (D)"
-en_formats.DATETIME_FORMAT = "Y-m-d H:i"
 
-# Logging
-REQUEST_ID_HEADER = None
+
+#### Logging
 if not DEBUG and 'WEB_ERROR_EMAIL_FROM' in os.environ and 'WEB_ERROR_EMAIL_TO' in os.environ:
 	SERVER_EMAIL = os.environ['WEB_ERROR_EMAIL_FROM']
 	ADMINS = ((addr, addr) for addr in os.environ['WEB_ERROR_EMAIL_TO'].split())
@@ -147,7 +150,7 @@ LOGGING = {
 	'disable_existing_loggers': False,
 	'filters': {
 		'request_id': {
-			'()': 'request_id.logging.RequestIdFilter',
+			'()': 'log_request_id.filters.RequestIDFilter',
 		},
 		'require_debug_false': {
 			'()': 'django.utils.log.RequireDebugFalse',
@@ -185,7 +188,7 @@ LOGGING = {
 	'loggers': {
 		'django': {
 			'handlers': ['console', 'file', 'mail_admins'],
-			'level': 'WARNING',
+			'level': 'INFO',
 			'propagate': True,
 		},
 		'cli': {
@@ -195,7 +198,3 @@ LOGGING = {
 		},
 	}
 }
-
-ADMIN_PATH = os.environ.get('WEB_ADMIN_PATH', '')
-if ADMIN_PATH and not ADMIN_PATH.endswith('/'):
-	ADMIN_PATH += '/'
