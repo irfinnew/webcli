@@ -2,6 +2,11 @@
 
 set -e
 
+. ~/venv/bin/activate
+
+
+
+
 echo '\033[36mUpdating code\033[0m'
 cd $HOME/app
 git pull
@@ -54,11 +59,11 @@ fi
 echo
 echo '\033[36mChecking systemd service file\033[0m'
 cd $HOME/app/system
-diff -u /etc/systemd/system/webcli.service webcli.service || true
+cdiff -u /etc/systemd/system/webcli.service webcli.service || true
 
 
 
 echo
 echo '\033[36mChecking nginx configuration\033[0m'
 cd $HOME/app/system
-diff -u /etc/nginx/sites-enabled/webcli webcli.nginx || true
+cdiff -u /etc/nginx/sites-enabled/webcli webcli.nginx || true
