@@ -12,7 +12,7 @@
 		<ul>
 			{% for c in commands %}
 			<li {%if c.popular%}class="popular"{%endif%} {%if c.common%}class="common"{%endif%}>
-				<cmd>{{c.keyword}} {%if c.suggest_url%}...{%endif%}</cmd>
+				<cmd>{{c.keyword}}</cmd>
 				<uses>{%if c.popular%}★{%endif%}{%if c.common%}☆{%endif%}</uses>
 				<desc>{{c.title}}</desc>
 			</li>

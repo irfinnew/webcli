@@ -74,17 +74,3 @@ def command(request, command):
 		return HttpResponseRedirect(cmd.url.replace('%s', args))
 	else:
 		return bookmark(request, cmd, args)
-
-
-
-def suggest(request, command):
-	(command, keyword, args, cmd) = parse_command(command)
-
-	if not cmd.suggest_url:
-		raise Http404
-
-	# Hack: keyword is included in suggest request. It has to be, otherwise
-	# the client will reject the response as not matching their query.
-	# The only other way is to fetch the suggestions ourselves and modify
-	# the response, but that probably means blocking webCLI for all users...
-	return HttpResponseRedirect(cmd.suggest_url.replace('%s', command))

@@ -7,5 +7,4 @@ urlpatterns = [
 	path('', views.home, name='home'),
 	path('opensearch.xml', views.opensearch, name='opensearch'),
 	path('cmd/<path:command>/', views.command, name='command'),
-	path('suggest/<path:command>/', views.suggest, name='suggest'),
 ]
