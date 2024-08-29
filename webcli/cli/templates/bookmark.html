@@ -9,6 +9,10 @@
 	<body>
 		<p><img src="/static/favicon.png"> <b>{{cmd.keyword}}</b>: {{cmd.title}}</p>
 
+		{% if args %}
+			<p><b>Unknown argument:</b> {{args}}</p>
+		{% endif %}
+
 		<table>
 			{% for ov in cmd.overrides.all %}
 			<tr>

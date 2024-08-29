@@ -17,7 +17,6 @@ class Command(models.Model):
 	default = models.BooleanField(default=False, help_text='When true, this command is used if an incoming request doesn\'t match any command.')
 	title = models.CharField(max_length=32, help_text='Displayed on the home page to identify/explain the command.')
 	url = models.URLField(blank=True, help_text='The command is redirected to this URL. <code>%s</code> in the URL is replaced with the command argument.')
-	empty_url = models.URLField(blank=True, help_text='If specified, this URL is used when the command is invoked without arguments.')
 	suggest_url = models.URLField(blank=True, help_text='URL for suggesting completions. Not sure this even works anymore...')
 	created_at = models.DateTimeField(default=timezone.now)
 	last_used = models.DateTimeField(blank=True, null=True)

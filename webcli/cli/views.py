@@ -54,8 +54,8 @@ def opensearch(request):
 
 
 
-def bookmark(request, cmd):
-	return render(request, 'bookmark.html', {'cmd': cmd})
+def bookmark(request, cmd, args):
+	return render(request, 'bookmark.html', {'cmd': cmd, 'args': args})
 
 
 
@@ -70,13 +70,10 @@ def command(request, command):
 		if override.argument == args:
 			return HttpResponseRedirect(override.url)
 
-	if not args and cmd.empty_url:
-		return HttpResponseRedirect(cmd.empty_url)
-
-	if not cmd.url:
-		return bookmark(request, cmd)
-
-	return HttpResponseRedirect(cmd.url.replace('%s', args))
+	if cmd.url:
+		return HttpResponseRedirect(cmd.url.replace('%s', args))
+	else:
+		return bookmark(request, cmd, args)
 
 
 
