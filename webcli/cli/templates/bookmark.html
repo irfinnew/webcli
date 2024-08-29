@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<title>webCLI FIXME</title>
+		<link rel="stylesheet" type="text/css" href="/static/webcli.css">
+		<link rel="icon" href="/static/favicon.png">
+		<link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="webCLI" />
+	</head>
+	<body>
+		<p><img src="/static/favicon.png"> <b>{{cmd.keyword}}</b>: {{cmd.title}}</p>
+
+		<table>
+			{% for ov in cmd.overrides.all %}
+			<tr>
+				<th>{{ov.argument}}</th>
+				<td><a href="{{ov.url}}">{{ov.title}}</a></td>
+			</tr>
+			{% endfor %}
+		</ul>
+	</body>
+</html>

@@ -24,7 +24,7 @@ def parse_command(command):
 	args = ' '.join(path[1:])
 
 	try:
-		cmd = Command.objects.get(keyword=keyword, active=True)
+		cmd = Command.objects.prefetch_related('overrides').get(keyword=keyword, active=True)
 	except ObjectDoesNotExist:
 		cmd = Command.objects.get(default=True)
 		keyword = ''
@@ -54,6 +54,11 @@ def opensearch(request):
 
 
 
+def bookmark(request, cmd):
+	return render(request, 'bookmark.html', {'cmd': cmd})
+
+
+
 def command(request, command):
 	(command, keyword, args, cmd) = parse_command(command)
 
@@ -61,10 +66,17 @@ def command(request, command):
 	cmd.use_count += 1
 	cmd.save()
 
+	for override in cmd.overrides.all():
+		if override.argument == args:
+			return HttpResponseRedirect(override.url)
+
 	if not args and cmd.empty_url:
 		return HttpResponseRedirect(cmd.empty_url)
-	else:
-		return HttpResponseRedirect(cmd.url.replace('%s', args))
+
+	if not cmd.url:
+		return bookmark(request, cmd)
+
+	return HttpResponseRedirect(cmd.url.replace('%s', args))
 
 
 

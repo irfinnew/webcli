@@ -20,24 +20,27 @@ make_inactive.short_description = "Deactivate selected commands"
 
 
 
+class OverrideInline(admin.TabularInline):
+	model = models.Override
+	fk_name = 'command'
+	extra = 0
+
+
 @admin.register(models.Command)
 class CommandAdmin(admin.ModelAdmin):
+	@admin.display(ordering='title', description='Title')
 	def _title(self, instance):
 		return mark_safe(f'<strong>{instance.title}</strong>') if instance.default else instance.title
-	_title.short_description = "Title"
-	_title.admin_order_field = 'title'
 
+	@admin.display(boolean=True, ordering='active', description='👁')
 	def _active(self, instance):
 		return instance.active
-	_active.short_description = '👁'
-	_active.admin_order_field = 'active'
-	_active.boolean = True
 
+	@admin.display(ordering='use_count', description='Use')
 	def _use_count(self, instance):
 		return instance.use_count
-	_use_count.short_description = 'Use'
-	_use_count.admin_order_field = 'use_count'
 
+	inlines = [OverrideInline]
 	list_display = ['keyword', '_active', '_use_count', '_title', 'created_at', 'last_used']
 	readonly_fields = ['created_at', 'last_used']
 	ordering = ['-default', '-active', '-use_count']

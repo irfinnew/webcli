@@ -1,10 +1,9 @@
 body {
 	font-family: sans-serif;
-	font-size: 14px;
 	background-color: #222217;
 	color: #eee;
 
-	padding: 30px auto 10px auto;
+	padding: 10px 0 10px 0;
 	min-width: 600px;
 	text-align: center;
 }
@@ -23,14 +22,32 @@ p img {
 	box-shadow: 0px 0px 5px #fff;
 }
 
-p a {
+a {
 	color: #88f;
 	text-decoration: none;
+}
+
+table {
+	display: inline-block;
+	margin: 0;
+	margin-top: 30px;
+	padding: 0;
+}
+
+table th, table td {
+	padding-bottom: 10px;
+	font-size: 120%;
+}
+
+table th {
+	text-align: right;
+	padding-right: 1em;
 }
 
 ul {
 	list-style: none;
 	margin: 0;
+	margin-top: 30px;
 	padding: 0;
 }
 
