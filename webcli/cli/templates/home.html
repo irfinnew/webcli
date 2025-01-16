@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<p><img src="/static/favicon.png"> <b>webCLI</b>, a <a href="http://yubnub.org/">YubNub</a>-inspired command-line interface to the web.</p>
-		<p>Set webCLI as the default search engine in an <a href="/static/opensearch.xml">opensearch</a>-compatible browser. Then type "gim porsche 928" in your browser's address bar to search Google Images for a porsche 928.</p>
+		<p>Set webCLI as the default search engine in an <a href="/opensearch.xml">opensearch</a>-compatible browser. Then type "gim porsche 928" in your browser's address bar to search Google Images for a porsche 928.</p>
 		<ul>
 			{% for c in commands %}
 			<li {%if c.popular%}class="popular"{%endif%} {%if c.common%}class="common"{%endif%}>
