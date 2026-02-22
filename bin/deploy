@@ -16,7 +16,8 @@ git pull
 echo
 echo '\033[36mChecking packages\033[0m'
 cd $HOME/app
-pip install -U -r requirements.txt
+# Ugh I hate pip
+pip install -U -r requirements.txt $(pip freeze | cut -d= -f1)
 #for PKG in $(egrep -v '^#' packages.debian)
 #do
 #	if dpkg --get-selections | egrep -q "^$PKG(:.*)?[[:space:]]*install$";
