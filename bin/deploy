@@ -1,14 +1,17 @@
 #! /bin/sh
 
 set -e
-
 . ~/venv/bin/activate
+set -u  # activate breaks with set -u :(
 
+echo '\033[36mUpdating dotfiles\033[0m'
+dotgit pull
 
 
 
 echo '\033[36mUpdating code\033[0m'
 cd $HOME/app
+git co "$@"
 git pull
 
 
