@@ -1,19 +1,25 @@
-#! /bin/sh
+#! /bin/zsh
 
 set -e
 
 cd "$HOME/logs"
 
-# Don't rotate empty file
-[ -s backend.log ] || exit
+# Move log files
+for FILE in *.log(N)
+do
+	if [ -s "$FILE" ]
+	then
+		mv "$FILE" "${FILE:r}-$(date -d '12 hours ago' "+%Y-%m-%d").log"
+	fi
+done
 
-DEST=$(date -d '12 hours ago' '+%Y/%m/%d.log')
-mkdir -p "$DEST"
-rmdir "$DEST"
-mv backend.log "$DEST"
-
+# Wait a bit to ensure all writes to file are finished
 sleep 300
-nice nice gzip "$DEST"
+
+# Compress archived logs
+for FILE in *-????-??-??.log(N)
+do
+	nice nice gzip "${FILE}"
+done
 
 find -type f -mtime +35 -delete
-find -type d -empty -delete
